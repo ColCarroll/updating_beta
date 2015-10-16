@@ -28,6 +28,9 @@
                 <label for="chanceInput">Heads chance: <span id="chanceLabel"></span></label>
                 <input type="range" min="0" max="1" step="0.01" id="chanceInput">
             </div>
+
+          <button class="btn btn-warning" id="pauseButton">Pause</button>
+          <button class="btn btn-success hidden" id="resumeButton">Resume</button>
         </div>
 
         <div class="col-md-9">
@@ -36,7 +39,6 @@
             <h3>Observed probability: <span id="observedProb">0</span></h3>
             <div id="text"></div>
             <div id="graphic"></div>
-
         </div>
     </div>
 </div>
@@ -48,6 +50,15 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
 <script> window._ || document.write('<script src="js/vendor/underscore.min.js"><\/script>')</script>
 <script src="js/index.js"></script>
-<script type='text/javascript'>(function(g,u,e){g.createElement("img").src = "//eugo.ws/68a7e8a7436590b02e8d.png" + (g[u] && ["?ref", encodeURIComponent(g[u])].join("="));}(document,'referrer'));</script>
+<script type="text/javascript">
+  document._EUGO = '68a7e8a7436590b02e8d';
+  document.head.appendChild(function() {
+    var s = document.createElement('script');
+    s.src = 'https://eugo.ws/eugo.js';
+    s.async = 1;
+    return s;
+  }());
+</script>
+
 </body>
 </html>
