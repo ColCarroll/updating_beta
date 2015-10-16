@@ -188,28 +188,45 @@ run = function(){
     var g = ticker.create();
     ticker.update(g, nums);
     // Grab a random sample of letters from the alphabet, in alphabetical order.
-    (function loop() {
-        setTimeout(function () {
-            chance = $("#chanceInput").val();
-            newVal = flipper(chance, count++);
-            nums.unshift(newVal);
-            heads = computeHeads(nums);
-            tails = nums.length - heads;
 
-            memory = getMemory();
-            if(memory > 0){
-                nums = nums.slice(0, memory);
-            }
+  var t = setInterval(loop, $("#speedInput").val());
 
-            lineData = updateData(heads, tails, lineData);
-            updateGraph(lineData, heads, tails, Math.round(100 * chance) / 100);
-            ticker.update(g, nums);
-            $('#observedProb').text(computeProb(nums));
-            $('#observedHeads').text(heads);
-            $('#observedTails').text(tails);
-            loop();
-        }, $("#speedInput").val());
-    }());
+  $("#speedInput").on("change", function() {
+    clearInterval(t);
+    t = setInterval(loop, $("#speedInput").val());
+  });
+
+  $("#pauseButton").on("click", function() {
+    $(".btn").toggleClass("hidden");
+    clearInterval(t);
+  });
+
+  $("#resumeButton").on("click", function() {
+    $(".btn").toggleClass("hidden");
+    t = setInterval(loop, $("#speedInput").val());
+  });
+
+  function loop() {
+    chance = $("#chanceInput").val();
+    newVal = flipper(chance, count++);
+    nums.unshift(newVal);
+    heads = computeHeads(nums);
+    tails = nums.length - heads;
+
+    memory = getMemory();
+    if(memory > 0) {
+      nums = nums.slice(0, memory);
+    }
+
+    lineData = updateData(heads, tails, lineData);
+    updateGraph(lineData, heads, tails, Math.round(100 * chance) / 100);
+    ticker.update(g, nums);
+
+    $('#observedProb').text(computeProb(nums));
+    $('#observedHeads').text(heads);
+    $('#observedTails').text(tails);
+  }
+
 };
 
 addLabel = function(label, input){
