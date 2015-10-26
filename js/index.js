@@ -194,6 +194,8 @@ run = function(){
   $("#speedInput").on("change", function() {
     clearInterval(t);
     t = setInterval(loop, $("#speedInput").val());
+    $("#resumeButton").addClass("hidden");
+    $("#pauseButton").removeClass("hidden");
   });
 
   $("#pauseButton").on("click", function() {
